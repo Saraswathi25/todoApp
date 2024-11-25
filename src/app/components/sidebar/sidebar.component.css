@@ -1,0 +1,8 @@
+/* Remove the hover effect */
+app-button:hover {
+    background-color: inherit; /* Retains original background */
+    transform: none; /* Removes any scaling or transformations */
+    box-shadow: none; /* Removes any shadow effect */
+    cursor: default; /* Changes the cursor to the default (no hand) */
+  }
+  

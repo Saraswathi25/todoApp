@@ -1,12 +1,13 @@
 <div class="drawer">
     <input id="my-drawer" type="checkbox" class="drawer-toggle" checked />
     
-    <div class="drawer-side">
-      <label for="my-drawer" aria-label="close sidebar"></label>
-      <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+   
+    
+      <ul class="menu bg-gray-200 text-base-content min-h-full  p-4"  >
         <!-- Sidebar content here -->
-        <li><a>Sidebar Item 1</a></li>
-        <li><a>Sidebar Item 2</a></li>
+         <li *ngFor="let item of buttonItem">
+       <app-button [name]="item.name" [icon]="item.icon" [routerLink]="item.link"></app-button>
+      </li>
       </ul>
-    </div>
+
   </div>

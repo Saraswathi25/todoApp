@@ -1,7 +1,9 @@
+
 export interface todoItem{
-    id :number,
+    id ?:number,
     name:string,
     status:string,
-    priority:string
+    priority:string,
+    due:Date
 
 }
