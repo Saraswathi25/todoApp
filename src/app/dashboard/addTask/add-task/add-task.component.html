@@ -1,0 +1,110 @@
+<dialog id="my_modal_1" class="modal modal-open">
+   
+
+    <div class="modal-box bg-white shadow-xl rounded-lg">
+      <h2 class="text-xl font-semibold text-center mb-4">Add Task</h2>
+      <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" (click)="closeDialog()">✕</button>
+        <!-- Name Field -->
+        <div class="form-control">
+          <label for="name" class="label">
+            <span class="label-text">Name</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="input input-bordered w-full"
+            required
+          />
+          <span
+            *ngIf="addTaskForm.get('name')?.touched && addTaskForm.get('name')?.errors?.['required']"
+            class="text-error text-sm"
+          >
+            Name is required.
+          </span>
+        </div>
+  
+        <!-- Status Field -->
+        <div class="form-control">
+          <label for="status" class="label">
+            <span class="label-text">Status</span>
+          </label>
+          <select
+            id="status"
+            formControlName="status"
+            class="select select-bordered w-full"
+            required
+          >
+            <option value="" disabled selected>Select Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <span
+            *ngIf="addTaskForm.get('status')?.touched && addTaskForm.get('status')?.errors?.['required']"
+            class="text-error text-sm"
+          >
+            Status is required.
+          </span>
+        </div>
+  
+        <!-- Priority Field -->
+        <div class="form-control">
+          <label for="priority" class="label">
+            <span class="label-text">Priority</span>
+          </label>
+          <select
+            id="priority"
+            formControlName="priority"
+            class="select select-bordered w-full"
+            required
+          >
+            <option value="" disabled selected>Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <span
+            *ngIf="addTaskForm.get('priority')?.touched && addTaskForm.get('priority')?.errors?.['required']"
+            class="text-error text-sm"
+          >
+            Priority is required.
+          </span>
+        </div>
+  
+        <!-- Due Date Field -->
+        <div class="form-control">
+          <label for="due" class="label">
+            <span class="label-text">Due Date</span>
+          </label>
+          <input
+            type="date"
+            id="due"
+            formControlName="due"
+            class="input input-bordered w-full"
+            required
+          />
+          <span
+            *ngIf="addTaskForm.get('due')?.touched && addTaskForm.get('due')?.errors?.['required']"
+            class="text-error text-sm"
+          >
+            Due Date is required.
+          </span>
+        </div>
+  
+        <!-- Submit Button   -->
+        <div class="form-control mt-6">
+          <button
+            type="submit"
+            class="btn  w-full bg-teal-600 text-white hover:bg-teal-800"
+            [disabled]="addTaskForm.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+  
+    </div>
+  </dialog>
+  

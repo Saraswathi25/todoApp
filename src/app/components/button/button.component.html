@@ -1,4 +1,4 @@
-<button class="btn" (click)="openAddTask()">
+<button class="btn">
     <span
       class="iconify text-lg mr-2"
       [attr.data-icon]="icon"
@@ -7,6 +7,4 @@
     ></span>
     {{ name }}
   </button>
-
-  <app-add-task *ngIf="isModalOpen" (isModalOpenEvent)="closeModal($event)"></app-add-task>
   
