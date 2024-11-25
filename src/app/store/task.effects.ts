@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { addTask, addTaskFailure, addTaskSuccess } from "./task.action";
-import { exhaustMap, map } from "rxjs";
+import { addTask, addTaskFailure, addTaskSuccess, loadTask, loadTasksFailure, loadTasksSuccess } from "./task.action";
+import { catchError, exhaustMap, map, mergeMap, of } from "rxjs";
 import { TaskService } from "../services/task.service";
 
 
@@ -11,6 +11,17 @@ export class TaskEffect{
 
     constructor(private action$:Actions ,private taskService: TaskService){
     }
+
+    loadTask$= createEffect(()=>
+    this.action$.pipe(
+        ofType(loadTask),
+        mergeMap(()=>{
+            return this.taskService.getTasks().pipe(
+                map((tasks) => loadTasksSuccess({ tasks })),
+                catchError((error) => of(loadTasksFailure({ error })))
+            );
+        })
+    ))
 
     addTask$ =createEffect(()=>
     this.action$.pipe(
