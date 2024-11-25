@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { TaskEffect } from './store/task.effects';
+import { TaskReducer } from './store/task.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import { TaskEffect } from './store/task.effects';
     AppRoutingModule,
     DashboardModule,
    AngularFireModule.initializeApp(environment.firebaseConfig), 
-   StoreModule.forRoot(),
+   StoreModule.forRoot({tasks:TaskReducer}),
    EffectsModule.forRoot([TaskEffect]),
    StoreDevtoolsModule.instrument({
     maxAge: 25,

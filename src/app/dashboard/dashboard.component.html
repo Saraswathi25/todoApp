@@ -7,6 +7,11 @@
     ></span>
     {{ name }}
   </button>
-
+  <div class="flex flex-wrap gap-4 justify-center mt-8">
+  <div *ngFor="let task of (tasks$ | async)" >
+    <app-task [name]="task.name" [status]="task.status" [priority]="task.priority" [due]="task.due" ></app-task>
+  </div>
+  </div>
   <app-add-task *ngIf="isModalOpen" (isModalOpenEvent)="closeModal($event)"></app-add-task>
+ 
   

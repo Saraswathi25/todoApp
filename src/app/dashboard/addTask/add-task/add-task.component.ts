@@ -35,6 +35,7 @@ export class AddTaskComponent implements OnInit{
   onSubmit(){
    const task = this.addTaskForm.value;
     this.store.dispatch(addTask({task}));
+    this.closeDialog();
 
   }
   closeDialog(){

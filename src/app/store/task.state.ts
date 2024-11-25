@@ -2,9 +2,9 @@ import { todoItem } from "../models/todoItem.model";
 
 
 export interface TaskState{
-    task:todoItem |null
+    task:todoItem[]
 }
 
 export const initialState: TaskState={
-    task:null
+    task:[]
 }
