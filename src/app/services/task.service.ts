@@ -21,4 +21,11 @@ export class TaskService{
           .collection<todoItem>(this.collectionName)
           .valueChanges({ idField: 'id' }); // Adds Firestore's document ID to each task
       }
-}
+
+      editTask(id: string, task: todoItem) {
+        return this.firestore.collection(this.collectionName).doc(id).update(task);
+      }
+      deleteTask(taskId: string) {
+        return this.firestore.collection('tasks').doc(taskId).delete();
+      }
+    }
