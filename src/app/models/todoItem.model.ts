@@ -1,6 +1,6 @@
 
 export interface todoItem{
-    id ?:number,
+    id ?:string,
     name:string,
     status:string,
     priority:string,

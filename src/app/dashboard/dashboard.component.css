@@ -1,0 +1,4 @@
+.task-container {
+    max-height: 500px; /* Set a fixed height or max height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }

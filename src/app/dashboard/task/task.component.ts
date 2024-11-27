@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { todoItem } from 'src/app/models/todoItem.model';
@@ -20,9 +20,22 @@ export class TaskComponent implements OnInit {
    priority !:string 
    @Input()
    due !:Date 
+   @Input()
+   id !:string 
+   @Output()
+   taskId : EventEmitter<string> =new EventEmitter<string>()
+   @Output()
+   taskIdDelete : EventEmitter<string> =new EventEmitter<string>()
  
   ngOnInit(){
    
+  }
+  deleteTask(id:string){
+    this.taskIdDelete.emit(id)
+
+  }
+  editTask(id:string){
+    this.taskId.emit(id)
   }
 
 }

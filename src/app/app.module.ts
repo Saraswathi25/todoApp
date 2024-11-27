@@ -17,13 +17,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { TaskEffect } from './store/task.effects';
 import { TaskReducer } from './store/task.reducer';
+import { ProfileComponent } from './profile/profile/profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     ButtonComponent,
     WelcomeComponent,
-    TaskComponent
+    TaskComponent,
+    ProfileComponent,
+ 
   ],
   imports: [
     BrowserModule,

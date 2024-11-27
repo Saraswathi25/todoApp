@@ -1,9 +1,26 @@
-<div class="card bg-base-100 w-96 shadow-xl">
+<div class="card bg-base-100 w-96 shadow-xl border-t-4"  
+[ngClass]="{
+    'border-blue-500': status === 'In Progress',
+    'border-red-500': status === 'Pending',
+    'border-green-500': status === 'Completed'
+  }">
+  <span class="absolute top-2 right-2 cursor-pointer text-xl text-red-500"
+  (click)="deleteTask(id)">
+<span class="iconify" data-icon="mdi:delete" data-inline="false"></span>
+</span>
     <div class="card-body">
-      <h2 class="card-title">{{name}}</h2>
-      <p>{{due}}</p>
+      <h2 class="card-title">{{ name }}</h2>
+      <p>{{ due }}</p>
+      <div class="badge text-white p-4"
+      [ngClass]="{
+        'bg-red-500': priority === 'High',
+        'bg-green-500': priority === 'Low',
+        'bg-blue-500': priority === 'Medium',
+
+      }">{{priority}}</div>
       <div class="card-actions justify-end">
-        <button class="btn ">Edit Task</button>
+        <button class="btn" (click)="editTask(id)">Edit Task</button>
       </div>
     </div>
   </div>
+  

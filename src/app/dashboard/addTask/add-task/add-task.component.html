@@ -2,7 +2,7 @@
    
 
     <div class="modal-box bg-white shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold text-center mb-4">Add Task</h2>
+      <h2 class="text-xl font-semibold text-center mb-4">{{selectedTask ? 'Edit Task' :'Add Task'}}</h2>
       <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" (click)="closeDialog()">✕</button>
         <!-- Name Field -->
@@ -98,7 +98,7 @@
           <button
             type="submit"
             class="btn  w-full bg-teal-600 text-white hover:bg-teal-800"
-            [disabled]="addTaskForm.invalid"
+            [disabled]="addTaskForm.invalid || (selectedTask && addTaskForm.pristine)"
           >
             Submit
           </button>
