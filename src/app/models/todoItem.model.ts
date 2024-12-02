@@ -4,6 +4,7 @@ export interface todoItem{
     name:string,
     status:string,
     priority:string,
-    due:Date
+    due:Date,
+    userId:string
 
 }

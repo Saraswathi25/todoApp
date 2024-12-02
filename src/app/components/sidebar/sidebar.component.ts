@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider } from '@angular/fire/auth'; 
+import { Store } from '@ngrx/store';
+import { loadUser, login } from 'src/app/user_store/user.action';
+import { selectUser } from 'src/app/user_store/user.selector';
+import { User } from 'src/app/user_store/user.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,33 +14,28 @@ import { GoogleAuthProvider } from '@angular/fire/auth';
 })
 export class SidebarComponent implements OnInit {
   buttonItem: any;
- // private auth: Auth = inject(Auth); // Inject the Auth service using modular approach
- constructor(private auth: AngularFireAuth) {}
+  user$ !: Observable<User |null>;
+
+ constructor(private auth: AngularFireAuth ,private store:Store) {}
   ngOnInit() {
+
+   
     this.buttonItem = [
       { name: 'Welcome', icon: 'mdi:home', link: '' },
       { name: 'Dashboard', icon: 'mdi:view-dashboard', link: 'dashboard' },
       { name: 'Task', icon: 'mdi:check-circle' },
-      { name: 'Profile', icon: 'mdi:account-circle' },
-      { name: 'Login', icon: 'mdi:account-circle' },
     ];
-  }
+   
+  
+    this.user$ = this.store.select(selectUser);
+   
 
-  login() {
-    const provider = new GoogleAuthProvider();
-    this.auth
-      .signInWithPopup(provider) // Using the legacy signInWithPopup method
-      .then((result) => {
-        console.log('User logged in:', result.user?.email);
-      })
-      .catch((error) => {
-        console.error('Login error:', error.message);
-      });
   }
 
   onEmitlogin(name: any) {
     if (name === 'Login') {
-      this.login();
+     const provider = new GoogleAuthProvider();
+     this.store.dispatch(login());
     }
   }
 }

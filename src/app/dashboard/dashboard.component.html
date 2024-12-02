@@ -1,10 +1,18 @@
+<div class="flex flex-wrap gap-4 justify-around">
 <button class="btn" (click)="openAddTask('open')">
   <span class="iconify text-lg mr-2" [attr.data-icon]="icon" data-inline="false"></span>
   {{ name }}
 </button>
-
+<div *ngFor="let filter of filterMethods">
+<app-dropdown [method]="filter"
+(filterChange)="onFilterChange($event)"></app-dropdown>
+</div>
+<button class="btn btn-outline btn-accent" (click)="clear()">
+ Clear
+</button>
+</div>
 <div class="task-container flex flex-wrap gap-4 justify-center mt-8">
-  <div *ngFor="let task of (tasks$ | async)">
+  <div *ngFor="let task of (filteredTask)">
     <app-task
       [name]="task.name"
       [status]="task.status"

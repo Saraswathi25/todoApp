@@ -1,4 +1,4 @@
-import { todoItem } from "../models/todoItem.model";
+import { todoItem } from "../../models/todoItem.model";
 
 
 export interface TaskState{

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { todoItem } from '../models/todoItem.model';
+import { todoItem } from '../../models/todoItem.model';
 
 //Add Task
 export const ADD_Task = '[Add Task] Add Task firebase';
@@ -28,7 +28,7 @@ export const addTaskSuccess = createAction(
 
 export const addTaskFailure = createAction(ADD_FAIL, props<{ error: any }>());
 
-export const loadTask = createAction(LOAD_TASK);
+export const loadTask = createAction(LOAD_TASK, props<{ userId: string }>());
 export const loadTasksSuccess = createAction(
   LOAD_TASK_SUCCESS,
   props<{ tasks: todoItem[] }>()
@@ -49,3 +49,4 @@ export const deleteTask =createAction(DELETE_TASK ,props<{id:string}>())
 
 export const deleteTaskSuccess =createAction(DELETE_TASK_SUCCESS,props<{id:string}>());
 export const deleteTaskFail =createAction(DELETE_TASK_FAIL,props<{error:any}>());
+export const clearTasks = createAction('[Task] Clear Tasks');

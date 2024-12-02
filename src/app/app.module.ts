@@ -15,9 +15,11 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { TaskEffect } from './store/task.effects';
-import { TaskReducer } from './store/task.reducer';
+import { TaskEffect } from './dashboard/store/task.effects';
+import { TaskReducer } from './dashboard/store/task.reducer';
 import { ProfileComponent } from './profile/profile/profile.component';
+import { AppReducer } from './Store/app.state';
+import { AuthEffects } from './user_store/user.effect';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,8 @@ import { ProfileComponent } from './profile/profile/profile.component';
     AppRoutingModule,
     DashboardModule,
    AngularFireModule.initializeApp(environment.firebaseConfig), 
-   StoreModule.forRoot({tasks:TaskReducer}),
-   EffectsModule.forRoot([TaskEffect]),
+   StoreModule.forRoot(AppReducer),
+   EffectsModule.forRoot([TaskEffect,AuthEffects]),
    StoreDevtoolsModule.instrument({
     maxAge: 25,
     logOnly: false,

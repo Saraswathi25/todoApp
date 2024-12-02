@@ -5,6 +5,7 @@ import { AddTaskComponent } from './addTask/add-task/add-task.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TaskComponent } from './task/task.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 
 const routes: Routes=[
@@ -19,7 +20,8 @@ const routes: Routes=[
   
     DashboardComponent,
     AddTaskComponent,
-    TaskComponent
+    TaskComponent,
+    DropdownComponent
   ],
   imports: [
     CommonModule,

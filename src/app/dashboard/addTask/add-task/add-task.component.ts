@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { todoItem } from 'src/app/models/todoItem.model';
 import { TaskService } from 'src/app/services/task.service';
-import { addTask, editTask } from 'src/app/store/task.action';
-import { TaskState } from 'src/app/store/task.state';
+import { addTask, editTask } from 'src/app/dashboard/store/task.action';
+import { TaskState } from 'src/app/dashboard/store/task.state';
 
 @Component({
   selector: 'app-add-task',
@@ -26,7 +26,7 @@ export class AddTaskComponent implements OnInit{
 
   
   ngOnInit(){
-    console.log(this.selectedTask)
+   
     this.addTaskForm = new FormGroup({
       name: new FormControl(this.selectedTask? this.selectedTask.name :''),
       status:new FormControl(this.selectedTask? this.selectedTask.status :''),

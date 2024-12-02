@@ -6,8 +6,15 @@
       <ul class="menu  text-base-content min-h-full  p-4"  >
         <!-- Sidebar content here -->
          <li *ngFor="let item of buttonItem">
-       <app-button [name]="item.name" [icon]="item.icon" [routerLink]="item.link" (item)="onEmitlogin($event)"></app-button>
+          
+       <app-button [name]="item.name" [icon]="item.icon" [routerLink]="item.link"></app-button>
       </li>
+      <li *ngIf="user$ | async ">
+      <app-button  name="Profile"   icon="mdi:account-circle" routerLink="profile" ></app-button>
+    </li>
+    <li *ngIf="!(user$ | async)">
+      <app-button  name="Login"    icon="mdi:login"  (item)="onEmitlogin($event)"></app-button>
+    </li>
       </ul>
-
+     
   </div>
