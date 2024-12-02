@@ -4,28 +4,57 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { todoItem } from "../models/todoItem.model";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 @Injectable({
     providedIn:'root'
 })
 export class TaskService{
-    constructor(private firestore: AngularFirestore){
+    constructor(private firestore: AngularFirestore,private auth: AngularFireAuth){
 
     }
     private collectionName = 'tasks';
-    addTask(task:todoItem){
-        return this.firestore.collection(this.collectionName).add(task);
-    }
-    getTasks(): Observable<todoItem[]> {
-        return this.firestore
-          .collection<todoItem>(this.collectionName)
-          .valueChanges({ idField: 'id' }); // Adds Firestore's document ID to each task
+     // Add a task with the user ID
+  addTask(task: todoItem) {
+    return this.auth.currentUser.then(user => {
+      if (user) {
+        const taskWithUser = { ...task, userId: user.uid }; // Attach the user ID
+        return this.firestore.collection(this.collectionName).add(taskWithUser);
+      } else {
+        throw new Error('User not authenticated');
       }
+    });
+  }
+   
+  // Fetch tasks only for the current user
+  getTasks(userId: string): Observable<todoItem[]> {
+    return this.firestore
+      .collection<todoItem>(this.collectionName, (ref) =>
+        ref.where('userId', '==', userId) // Query tasks for the specific user
+      )
+      .valueChanges({ idField: 'id' }); // Include Firestore document IDs
+  }
 
-      editTask(id: string, task: todoItem) {
-        return this.firestore.collection(this.collectionName).doc(id).update(task);
+  // Edit a task (ensure the task belongs to the current user)
+  editTask(id: string, task: todoItem) {
+    return this.auth.currentUser.then(user => {
+      if (user) {
+        const updatedTask = { ...task, userId: user.uid }; // Attach the user ID
+        return this.firestore.collection(this.collectionName).doc(id).update(updatedTask);
+      } else {
+        throw new Error('User not authenticated');
       }
-      deleteTask(taskId: string) {
-        return this.firestore.collection('tasks').doc(taskId).delete();
+    });
+  }
+
+  // Delete a task (ensure the task belongs to the current user)
+  deleteTask(taskId: string) {
+    return this.auth.currentUser.then(user => {
+      if (user) {
+        return this.firestore.collection(this.collectionName).doc(taskId).delete();
+      } else {
+        throw new Error('User not authenticated');
       }
+    });
+  }
     }
